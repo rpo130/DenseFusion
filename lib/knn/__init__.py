@@ -4,7 +4,7 @@ import operator as op
 import functools
 import torch
 from torch.autograd import Variable, Function
-from lib.knn import knn_pytorch as knn_pytorch
+from knn_pytorch import knn_pytorch
 
 class KNearestNeighbor(Function):
   """ Compute k nearest neighbors for each query point.
@@ -12,15 +12,27 @@ class KNearestNeighbor(Function):
   def __init__(self, k):
     self.k = k
 
-  def forward(self, ref, query):
+  # def forward(self, ref, query):
+  #   ref = ref.float().cuda()
+  #   query = query.float().cuda()
+
+  #   inds = torch.empty(query.shape[0], self.k, query.shape[2]).long().cuda()
+
+  #   knn_pytorch.knn(ref, query, inds)
+
+  #   return inds
+  
+  @staticmethod
+  def forward(ctx, ref, query, k):
     ref = ref.float().cuda()
     query = query.float().cuda()
 
-    inds = torch.empty(query.shape[0], self.k, query.shape[2]).long().cuda()
+    inds = torch.empty(query.shape[0], k, query.shape[2]).long().cuda()
 
     knn_pytorch.knn(ref, query, inds)
 
     return inds
+    
 
 
 class TestKNearestNeighbor(unittest.TestCase):

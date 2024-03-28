@@ -31,10 +31,11 @@ This repository is the implementation code of the paper "DenseFusion: 6D Object 
 * PIL
 * scipy
 * numpy
-* pyyaml
+* pyyaml==5.4.1
 * logging
 * matplotlib
 * CUDA 7.5/8.0/9.0 (Required. CPU-only will lead to extreme slow training speed because of the loss calculation of the symmetry objects (pixel-wise nearest neighbour loss).)
+* opencv
 
 ## Code Structure
 * **datasets**

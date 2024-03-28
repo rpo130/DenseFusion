@@ -1,0 +1,7 @@
+.vscode
+__pycache__
+*.egg-info
+*.egg
+*.o
+lib/knn/build
+datasets/linemod/Linemod_preprocessed
